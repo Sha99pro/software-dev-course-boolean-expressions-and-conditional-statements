@@ -24,6 +24,7 @@ Paste the following code into your editor:
 
 */
 
+/*
 const readline = require('readline-sync');
 
 const hasTorch = true;
@@ -41,6 +42,7 @@ if (choice === "mountains" && hasTorch) {
 } else {
   console.log("You get lost and wander aimlessly.");
 }
+  */
 
 /* 
 
@@ -50,3 +52,53 @@ Add Customization and expand the game:
   - Use nested conditionals and logical operators to create complex outcomes.
 
 */
+
+const readline = require('readline-sync');
+
+const hasTorch = true;
+const hasMap = false;
+let hasSword = false;
+let hasCompass = false;
+
+console.log("You see two paths: one leads to the mountains, the other to the village.");
+const choice = readline.question("Do you go to the 'mountains' or the 'village'?");
+
+if (choice === "mountains" && hasTorch) {
+  console.log("You safely navigate through the dark mountains.");
+
+  // New small addition
+  const swordChoice = readline.question("You find a sword. Pick it up? (yes/no) ");
+  if (swordChoice === "yes") {
+    hasSword = true;
+    console.log("You now have a sword!");
+  } else {
+    console.log("You leave the sword behind.");
+  }
+
+  const bearChoice = readline.question("A wild bear appears! Do you 'fight' or 'run'? ");
+  if (bearChoice === "fight" && hasSword) {
+    console.log("You fight bravely with your sword and win!");
+  } else if (bearChoice === "fight" && !hasSword) {
+    console.log("You try to fight but without a sword, you lose.");
+  } else {
+    console.log("You run away safely but miss the treasure.");
+  }
+
+} else if (choice === "mountains" && !hasTorch) {
+  console.log("It's too dark to proceed. You decide to turn back.");
+
+} else if (choice === "village" || hasMap) {
+  console.log("You find your way to the village.");
+
+  // Another small addition
+  const compassChoice = readline.question("You see a compass on the ground. Pick it up? (yes/no) ");
+  if (compassChoice === "yes") {
+    hasCompass = true;
+    console.log("You now have a compass—it may help you later!");
+  } else {
+    console.log("You ignore the compass and continue walking.");
+  }
+
+} else {
+  console.log("You get lost and wander aimlessly.");
+}
